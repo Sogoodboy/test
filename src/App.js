@@ -23,6 +23,18 @@ const Forget = Loadable({
   loader: () => import(/* webpackChunkName:'reg' */'./pages/Forget'),
   loading: loading
 })
+const City = Loadable({
+  loader: () => import(/* webpackChunkName:'reg' */'./pages/City'),
+  loading: loading
+})
+const Search = Loadable({
+  loader: () => import(/* webpackChunkName:'reg' */'./pages/Search'),
+  loading: loading
+})
+const Map = Loadable({
+  loader: () => import(/* webpackChunkName:'reg' */'./pages/Map'),
+  loading: loading
+})
 function App() {
   return (
     <div className="App">
@@ -32,6 +44,9 @@ function App() {
           <Route path='/login' component={Login}></Route>
           <Route path='/reg' component={Reg}></Route>
           <Route path='/forget' component={Forget}></Route>
+          <Route path='/city' component={City}></Route>
+          <Route path='/search' component={Search}></Route>
+          <Route path='/map' component={Map}></Route>
 
         </Switch>
       </HashRouter>
