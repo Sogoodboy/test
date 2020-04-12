@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile';
 import Home from './Home'
 import Wechat from './Wechat'
-import My from './My'
+import My from '../My'
 import History from './History'
 
 export default class Main extends Component {

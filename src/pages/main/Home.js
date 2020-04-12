@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Flex, Carousel, Grid, WhiteSpace } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
 import { youlike } from '../../apis/api'
-
+import Hourshistory from '../component/Hourshistory'
+import { connect } from 'react-redux'
+import { addHistoryAC } from '../redux/store'
 class Home extends Component {
     state = {
         city: '定位中.....',
@@ -85,16 +87,22 @@ class Home extends Component {
                         city
                     })
                 }
+
             })
         })
+        //发送请求
         youlike().then((req) => {
             this.setState({
                 youlike: req.data.data
             })
 
+        }).catch((err) => {
+            console.log(err);
         })
     }
-
+    addhistory = (item) => {
+        this.props.dispatch(addHistoryAC(item))
+    }
     render() {
         const { city, youlike } = this.state
         return (
@@ -146,23 +154,11 @@ class Home extends Component {
                 <div>
                     <div style={{ padding: 10 }}>猜你喜欢</div>
                     {youlike.map((v) => {
-                        return <Flex key={v.id}>
-                            <img style={{ width: 100, height: 100, marginRight: 10 }} src={v.pic} alt=''></img>
-
-                            <div style={{ flex: 1 }}>
-                                <Flex style={{ flex: 1 }} justify='between'>
-                                    <span style={{ fontSize: 20, fontWeight: 700 }}>{v.name}</span>
-                                    <span>{v.price}/平</span>
-                                </Flex>
-                                <div style={{ marginTop: 10, marginBottom: 10 }}>{v.address}</div>
-                                <div>4室2厅 200平</div>
-                            </div>
-
-                        </Flex>
+                        return <Hourshistory v={v} addhistory={this.addhistory} key={v.id}></Hourshistory>
                     })}
                 </div>
             </div>
         )
     }
 }
-export default withRouter(Home)
+export default connect()(withRouter(Home))

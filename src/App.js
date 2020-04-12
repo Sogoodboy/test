@@ -7,6 +7,9 @@ import Main from './pages/main/Main';
 // import Reg from './pages/Reg';
 //引入路由懒加载功能
 import Loadable from 'react-loadable'
+//引入store数据
+import { Provider } from 'react-redux'
+import store from './pages/redux/store'
 //设置loading配置项 加载中
 const loading = () => <div>加载中。。。。。。</div>
 //创建懒加载对象
@@ -38,18 +41,21 @@ const Map = Loadable({
 function App() {
   return (
     <div className="App">
-      <HashRouter>
-        <Switch>
-          <Route path='/' exact component={Main}></Route>
-          <Route path='/login' component={Login}></Route>
-          <Route path='/reg' component={Reg}></Route>
-          <Route path='/forget' component={Forget}></Route>
-          <Route path='/city' component={City}></Route>
-          <Route path='/search' component={Search}></Route>
-          <Route path='/map' component={Map}></Route>
+      <Provider store={store}>
 
-        </Switch>
-      </HashRouter>
+        <HashRouter>
+          <Switch>
+            <Route path='/' exact component={Main}></Route>
+            <Route path='/login' component={Login}></Route>
+            <Route path='/reg' component={Reg}></Route>
+            <Route path='/forget' component={Forget}></Route>
+            <Route path='/city' component={City}></Route>
+            <Route path='/search' component={Search}></Route>
+            <Route path='/map' component={Map}></Route>
+
+          </Switch>
+        </HashRouter>
+      </Provider>
     </div>
   );
 }
